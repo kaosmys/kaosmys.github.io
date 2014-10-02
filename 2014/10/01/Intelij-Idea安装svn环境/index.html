@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<!--
+	Striped 2.5 by HTML5 Up!
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Ported to Hexo by Adam Stokes @battlemidget
+-->
+<html>
+  <head>
+    
+    <title>Intelij Idea安装svn环境 | knocking on Heaven‘s Door</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    
+        <meta name="author" content="Peter peng">
+    
+    
+        <meta name="description" content="Android | peter’s blog | java | gradle | Mobile">
+    
+    
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/js/skel.min.js" type="text/javascript"></script>
+
+    <script src="/js/skel-panels.min.js" type="text/javascript"></script>
+
+    <script src="/js/init.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/style-desktop.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/style-wide.css" type="text/css">
+
+    <link rel="alternate" href="/atom.xml" title="knocking on Heaven‘s Door" type="application/atom+xml">
+    <link rel="stylesheet" href="/js/styles/tomorrow-night.css" type="text/css">
+
+    <script src="/js/highlight.pack.js" type="text/javascript"></script>
+
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+    
+
+  </head>
+
+
+<body class="left-sidebar">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Content -->
+    <div id="content">
+      <div id="content-inner">
+	<!-- Post -->
+<article id="post-Intelij-Idea安装svn环境" class="box post post-excerpt">
+  <header>
+    
+  
+    <h2>Intelij Idea安装svn环境</h2>
+  
+
+
+  </header>
+  <div class="info">
+    <span class="date"><span class="month">10月</span> <span class="day">1</span><span class="year">, 2014</span></span>
+    <ul class="stats">
+      
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=woshihudapq@163.com"></script>
+
+
+    </ul>
+  </div>
+  <p>
+  
+    <h1 id="IDEA_12-1-4安装配置svn环境">IDEA 12.1.4安装配置svn环境</h1>
+<p>作为java/android新手，大都以eclipse作为ide。但是随着google对<strong>android studio</strong>的支持，eclipse的低效将会在逐渐完善的android studio面前暴露出来。扯多了，回到正题。上家公司采用的是IDEA+SVN作为小组编程环境，国内对idea的资料还是很少的，所以在此写下这篇文章帮助猿猿们能配置好svn的环境，体验下<strong>IDEA</strong>这个神奇的高效的令人叫绝的IDE~~~~<br><a id="more"></a></p>
+<p> <strong>SVN的授权</strong><br> 在配置idea之前要配置好svn服务器的连接授权（<em>本文不对svn服务器相关设置进行详细讲解，请百度谷歌之</em>）</p>
+<ul>
+<li>打开<strong>IDEA</strong>的<code>File | Settings | Project Settings | Version Control</code></li>
+<li>在<strong>version control box</strong>中点击<code>Configure VCS</code></li>
+<li>在<strong>version control dialog</strong>中选择<code>Subversion</code></li>
+</ul>
+<hr>
+<p>1.<strong>浏览SVN 远程仓库</strong><br> 在checking out文件之前，可以浏览svn远程仓库的内容。svn 远程仓库浏览页可以帮助你增添或删减远程地址，查看或check out文件和文件夹的历史版本，查看更改，创建分支或标签。</p>
+<blockquote>
+<p><strong>在浏览svn远程仓库前，需要一个合法的svn账户</strong></p>
+</blockquote>
+<ul>
+<li><strong>浏览步骤</strong><ul>
+<li>在主页面，选择 <code>VCS | Browse Subversion Repository</code></li>
+<li>在<code>New Repository Location dialog box</code>:中输入远程仓库URl<br><img src="http://hexo-pics.qiniudn.com/2014-10-2-1.jpeg" alt="远程仓库url"></li>
+<li>在<code>SVN Repositories tool window</code>中查看仓库的内容<br><img src="http://hexo-pics.qiniudn.com/2014-10-2-2.jpeg" alt="远程仓库url"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>2.<strong>从远程仓库获取文件</strong></p>
+<ul>
+<li><code>checking out</code> 文件就是获取文件的副本，当进行不要的更改后，通过<code>comming</code>、或<code>check in</code>操作将结果上传 </li>
+<li>从SVN进行<strong>checkout</strong>的操作步骤<ul>
+<li>在主页面选择<code>VCS | Checkout from Version Control</code></li>
+<li>在子菜单中选择<code>Subversion</code></li>
+<li>在<code>Check Out From Subversion dialog box</code>中，选择需要进行checkout的url地址<br><img src="http://hexo-pics.qiniudn.com/2014-10-2-3.png" alt="checkout"></li>
+<li>在点击<code>Checkout</code>后，选择本地副本保存的地址</li>
+<li>在<code>SVN Checkout Options</code>中进行额外参数的选择</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>3.<strong>正在Checking的SVN工程状态</strong><br>除了显示与仓库相关的现有文件状态，idea也整合了SVN所提供的显示工程文件状态的view</p>
+<ul>
+<li>查看现有工程文件和仓库的不同状态步骤<ul>
+<li>打开现有工程</li>
+<li>在主页面中，选择<code>VCS | Refresh File Status</code></li>
+<li>更换到<code>Changes tool window, tab Local.</code><br><img src="http://hexo-pics.qiniudn.com/2013-10-2-4.jpeg" alt="checkout"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>4.<strong>清除本地仓库副本</strong><br><strong>cleanup</strong>命令主要适合于以下场景:</p>
+<ul>
+<li><em>你的本地工程副本以及不是一个连续状态，由于svn命令被中断</em></li>
+<li><em>文件的时间戳已经更改而起内容确未更改</em></li>
+<li>操作步骤：<ul>
+<li>选择需要更改的文件和目录，选择 <code>Subversion | Cleanup</code> </li>
+<li>打开需要操作的文件，并选择<code>VCS | Subversion | Cleanup</code></li>
+<li>在Local标签中选择需要更改的文件和目录，选择<code>Subversion | Cleanup</code> </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>5.<strong>配置本地副本的的内容格式（svn版本）</strong><br>svn能进行新内容的刷新或保存老版本的选择，在特定工作副本的条件下，经常要更换到另一个svn格式。即不再IDE环境下进行更新svn格式的刷新，但仅是一个svn控制的目录</p>
+<hr>
+<p>6.<strong>配置svn的分支</strong></p>
+<ul>
+<li>svn能进行父目录的组合操作。每次展示的各个list能掩饰分支的各个操作，例如同步工作副本，对比分支操作等</li>
+<li>操作步骤<ul>
+<li>在 <code>Changes</code>窗口，打开<code>Subversion Working Copies Information</code> 标签页，点击<code>Configure Branches link</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>7.<strong>创建svn分支</strong><br>svn提供了给本地副本创建分支或标签的功能。<strong>创建副本的功能是为了防止因为其他人已经将文件锁住而不能操作带来的低效开发</strong>。</p>
+<ul>
+<li>创建步骤<ul>
+<li>在VCS菜单中，选择 <code>Subversion | Branch or Tag</code>.选择源代码目录并选择操作命令。打开 <code>Create Branch or Tag dialog box opens</code>.<br><img src="http://hexo-pics.qiniudn.com/2014-10-5.jpeg" alt="checkout"></li>
+<li>在<code>Copy from</code>部分，选择将要复制的源码文件夹，可以选择本地工作副本或是远程仓库</li>
+<li>在<code>Copy to</code>部分中，指定新分支或标签将要存放的文件，可以使用URL，证明性分支或标签名</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>如果是远程仓库被选择，需要注意点击右侧的标记，来填满Repository Location栏执行新分支的基本版本，可以为Head版本或是特定数字</p>
+</blockquote>
+<hr>
+<p>8.<strong>解决文件冲突</strong><br>如果在svn下出现文件冲突，则冲突标记会显示在冲突的文件上，会有三个辅助无版本文件显示在工作副本中:</p>
+<ul>
+<li><strong>filename.mine</strong>: the copy of your local file without conflict markers.</li>
+<li><strong>filename.rOld</strong>: the base revision you have last synchronized to.</li>
+<li><strong>filename.rNew</strong>:the latest version on the server.</li>
+</ul>
+<p>冲突文件会展示在Local标签下，在Version Control窗口下的Update info标签下，他们在 Merged with conflicts list中展示。</p>
+<p><strong>解决冲突的方法：</strong></p>
+<ul>
+<li>使用merge tool</li>
+<li>在编辑器中，需要标记处理过的文件</li>
+</ul>
+
+  
+  </p>
+  <footer class="article-footer">
+    <a data-url="http://yoursite.com/2014/10/01/Intelij-Idea安装svn环境/" data-id="ryeem2k9jhgfjsu0" class="article-share-link">Share</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-studio/">android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/idea/">idea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jetbrains/">jetbrains</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
+
+
+  </footer>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2014/09/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+      </div>
+    </div>
+    <div id="sidebar">
+  <!-- Logo -->
+  <div id="logo">
+    <h1>knocking on Heaven‘s Door</h1>
+    <h2>Android Craftsman</h2>
+  </div>
+  
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+
+
+  <!-- Hexo Widgets -->
+  
+    <!-- Search -->
+<section class="box search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" class="text" name="q" results="0" placeholder="search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</section>
+
+  
+    
+  <section class="box recent-posts">
+    <header>
+      <h2>Recent Posts</h2>
+    </header>
+    <ul>
+      
+        <li>
+          <a href="/2014/10/01/Intelij-Idea安装svn环境/">
+            Intelij Idea安装svn环境
+          </a>
+        </li>
+        
+        <li>
+          <a href="/2014/09/24/hello-world/">
+            Hello World
+          </a>
+        </li>
+        
+    </ul>
+  </section>
+  
+
+  
+    
+<section>
+  <h2>tags</h2>
+  <ul>
+       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android-studio/">android studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jetbrains/">jetbrains</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li></ul>
+  </ul>
+</section>
+
+
+  
+    
+  
+
+  <!-- Copyright -->
+  <div id="copyright">
+  
+  &copy; 2014 Peter peng
+  
+  Powered by: <a href="https://github.com/tommy351/hexo">Hexo</a><br />
+  Designed by: <a href="http://html5up.net/">HTML5 UP</a>
+  <p>
+    
+      <a href="https://twitter.com/peterfancydata" class="fa fa-twitter">&nbsp;</a>
+     
+    
+    
+
+   </p>
+</div>
+
+
+
+</div>
+
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+  </div>
+</body>
+</html>
