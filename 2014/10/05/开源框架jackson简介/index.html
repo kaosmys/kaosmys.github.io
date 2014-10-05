@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<!--
+	Striped 2.5 by HTML5 Up!
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Ported to Hexo by Adam Stokes @battlemidget
+-->
+<html>
+
+<script type="text/javascript">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa784dda52f09bbc7e1ef5f6a3d04e6d9' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</script>
+
+  <head>
+    
+    <title>开源框架jackson简介 | knocking on Heaven‘s Door</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    
+        <meta name="author" content="Peter peng">
+    
+    
+        <meta name="description" content="Android | peter’s blog | java | gradle | Mobile">
+    
+    
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/js/skel.min.js" type="text/javascript"></script>
+
+    <script src="/js/skel-panels.min.js" type="text/javascript"></script>
+
+    <script src="/js/init.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/style-desktop.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/style-wide.css" type="text/css">
+
+    <link rel="alternate" href="/atom.xml" title="knocking on Heaven‘s Door" type="application/atom+xml">
+    <link rel="stylesheet" href="/js/styles/tomorrow-night.css" type="text/css">
+
+    <script src="/js/highlight.pack.js" type="text/javascript"></script>
+
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+    
+
+  </head>
+
+
+<body class="left-sidebar">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Content -->
+    <div id="content">
+      <div id="content-inner">
+	<!-- Post -->
+<article id="post-开源框架jackson简介" class="box post post-excerpt">
+  <header>
+    
+  
+    <h2>开源框架jackson简介</h2>
+  
+
+
+  </header>
+  <div class="info">
+    <span class="date"><span class="month">10月</span> <span class="day">5</span><span class="year">, 2014</span></span>
+    <ul class="stats">
+      
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=woshihudapq@163.com"></script>
+
+
+    </ul>
+  </div>
+  <p>
+  
+    <p>Jackson提供了3种可选的方法来进行JSON解析</p>
+<ul>
+<li><strong>Streaming API</strong>可以离散地读写JSON内容<ul>
+<li>org.codehaus.jackson.JsonParser可以读取</li>
+<li>org.codehaus.jackson.JsonGenerator可以写出</li>
+</ul>
+</li>
+<li><strong>Tree Model</strong>提供了一个可变的内存树来展示JSON文件<ul>
+<li>org.codehaus.jackson.map.ObjectMapper可以建树，其中包含了JsonNode内容</li>
+<li>Tree的内容和XML DOM形式相同</li>
+</ul>
+</li>
+<li><strong>Data Binding </strong>能降JSON转换成POJO，转换的形式是以annotations为基础的<ul>
+<li>有两种形式：simple和full data binding<ul>
+<li>Simple data binding：转换为Java Maps,Lists,Strings,Numbers,Booleans,Nulls</li>
+<li>Full data binding:转换成任意的Java bean格式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<p>应用举例：</p>
+<ol>
+<li><p>Full Data Binding(POJO) 举例<br> <em>org.codehaus.jackson.map.ObjectMapper</em> 可以讲JSON data转化成java beans格式的内容</p>
+<p>  `</p>
+<pre><code>    {
+      "<span class="attribute">name</span>" : <span class="value">{ "<span class="attribute">first</span>" : <span class="value"><span class="string">"Joe"</span></span>, "<span class="attribute">last</span>" : <span class="value"><span class="string">"Sixpack"</span> </span>}</span>,
+      "<span class="attribute">gender</span>" : <span class="value"><span class="string">"MALE"</span></span>,
+      "<span class="attribute">verified</span>" : <span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">userImage</span>" : <span class="value"><span class="string">"Rm9vYmFyIQ=="</span></span>
+</code></pre><p>  }<br>  `<br>它将java中的两行代码转换为一个User的实例<br> 1 <strong>ObjectMapper</strong> mapper = new ObjectMapper(); // can reuse, share globally<br>2 User user = mapper.<strong>readValue</strong>(new File(“user.json”), User.class);</p>
+</li>
+</ol>
+<p>其中User类是如下所示：</p>
+<pre><code>   <span class="number">1</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>{
+   <span class="number">2</span>     <span class="keyword">public</span> <span class="keyword">enum</span> Gender { MALE, FEMALE };
+   <span class="number">3</span> 
+   <span class="number">4</span>     <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Name</span> </span>{
+   <span class="number">5</span>       <span class="keyword">private</span> String _first, _last;
+   <span class="number">6</span> 
+   <span class="number">7</span>       <span class="keyword">public</span> String <span class="title">getFirst</span>() { <span class="keyword">return</span> _first; }
+   <span class="number">8</span>       <span class="keyword">public</span> String <span class="title">getLast</span>() { <span class="keyword">return</span> _last; }
+   <span class="number">9</span> 
+  <span class="number">10</span>       <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFirst</span>(String s) { _first = s; }
+  <span class="number">11</span>       <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLast</span>(String s) { _last = s; }
+  <span class="number">12</span>     }
+  <span class="number">13</span> 
+  <span class="number">14</span>     <span class="keyword">private</span> Gender _gender;
+  <span class="number">15</span>     <span class="keyword">private</span> Name _name;
+  <span class="number">16</span>     <span class="keyword">private</span> <span class="keyword">boolean</span> _isVerified;
+  <span class="number">17</span>     <span class="keyword">private</span> <span class="keyword">byte</span>[] _userImage;
+  <span class="number">18</span> 
+  <span class="number">19</span>     <span class="keyword">public</span> Name <span class="title">getName</span>() { <span class="keyword">return</span> _name; }
+  <span class="number">20</span>     <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isVerified</span>() { <span class="keyword">return</span> _isVerified; }
+  <span class="number">21</span>     <span class="keyword">public</span> Gender <span class="title">getGender</span>() { <span class="keyword">return</span> _gender; }
+  <span class="number">22</span>     <span class="keyword">public</span> <span class="keyword">byte</span>[] <span class="title">getUserImage</span>() { <span class="keyword">return</span> _userImage; }
+  <span class="number">23</span> 
+  <span class="number">24</span>     <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span>(Name n) { _name = n; }
+  <span class="number">25</span>     <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setVerified</span>(<span class="keyword">boolean</span> b) { _isVerified = b; }
+  <span class="number">26</span>     <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGender</span>(Gender g) { _gender = g; }
+  <span class="number">27</span>     <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserImage</span>(<span class="keyword">byte</span>[] b) { _userImage = b; }
+  <span class="number">28</span> }
+</code></pre><p>之后返回JSON的形式如下所示：</p>
+<pre><code>mapper.writeValue(new <span class="keyword">File</span>(<span class="string">"user-modified.json"</span>), <span class="literal">user</span>)<span class="comment">;</span>
+</code></pre><p>   对于更加灵活地data binding，<strong>Jackson</strong>提供了annotation的方式来进行运用</p>
+<blockquote>
+<p>实际项目中采用如上形式较多</p>
+</blockquote>
+<ol>
+<li><strong>Raw </strong>形式的data binding 栗子<br>对一些没有特别声明的java 类与JSON 转换/被转化,”Untyped data binding”是一个较好地方式。<br>早期的JSON binding如下所示：</li>
+</ol>
+<pre><code><span class="keyword">Map</span>&lt;<span class="typename">String</span>,Object&gt; userData = mapper.readValue(<span class="keyword">new</span> <span class="keyword">File</span>(<span class="string">"user.json"</span>), <span class="keyword">Map</span>.class);
+</code></pre><p>并且userData 将被如下方式构造：</p>
+<pre><code><span class="number">1</span> Map&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt; userData = <span class="keyword">new</span> HashMap&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt;();
+</code></pre><p>   2 Map<string,string> nameStruct = new HashMap<string,string>();<br>   3 nameStruct.put(“first”, “Joe”);<br>   4 nameStruct.put(“last”, “Sixpack”);<br>   5 userData.put(“name”, nameStruct);<br>   6 userData.put(“gender”, “MALE”);<br>   7 userData.put(“verified”, Boolean.FALSE);<br>   8 userData.put(“userImage”, “Rm9vYmFyIQ==”);</string,string></string,string></p>
+<p>构造Map，可以使用如下代码：</p>
+<pre><code>mapper.writeValue(<span class="keyword">new</span> <span class="keyword">File</span>(<span class="string">"user-modified.json"</span>), userData);
+</code></pre><ol>
+<li>泛型 Data Binding<br> 对于那些使用泛型的情况，需要使用Type Erasure 来防止使用使用<code>Collection&lt;String&gt;.class</code> ，因此如果需bind data到一个<code>Map&lt;String,User&gt;</code> ,需要使用如下代码：</li>
+</ol>
+<pre><code><span class="type">Map</span>&lt;<span class="type">String</span>,<span class="type">User</span>&gt; <span class="literal">result</span> = mapper.readValue(src, new <span class="type">TypeReference</span>&lt;<span class="type">Map</span>&lt;<span class="type">String</span>,<span class="type">User</span>&gt;&gt;() { });
+</code></pre><p>其中<strong>TypeReference</strong>是只能被传递给一个泛型定义的，其中重要的部分<strong><map<string,user>&gt;</map<string,user></strong>    定义了需要binding 的类型</p>
+<blockquote>
+<p>若不想使用如上形式，只要定义<code>Map&lt;?,?&gt;</code>也可以达到如上效果</p>
+</blockquote>
+
+  
+  </p>
+  <footer class="article-footer">
+    <a data-url="http://yoursite.com/2014/10/05/开源框架jackson简介/" data-id="jyk5x2jwriop2rr6" class="article-share-link">Share</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jackson/">jackson</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li></ul>
+
+
+  </footer>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2014/10/01/Intelij-Idea安装svn环境/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Intelij Idea安装svn环境</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+      </div>
+    </div>
+    <div id="sidebar">
+  <!-- Logo -->
+  <div id="logo">
+    <h1>knocking on Heaven‘s Door</h1>
+    <h2>Android Craftsman</h2>
+  </div>
+  
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      
+      <li><a href="/archives">Archives</a></li>
+      
+      <li><a href="">Home</a></li>
+      
+    </ul>
+  </nav>
+
+
+  <!-- Hexo Widgets -->
+  
+    <!-- Search -->
+<section class="box search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" class="text" name="q" results="0" placeholder="search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</section>
+
+  
+    
+  <section class="box recent-posts">
+    <header>
+      <h2>Recent Posts</h2>
+    </header>
+    <ul>
+      
+        <li>
+          <a href="/2014/10/05/开源框架jackson简介/">
+            开源框架jackson简介
+          </a>
+        </li>
+        
+        <li>
+          <a href="/2014/10/01/Intelij-Idea安装svn环境/">
+            Intelij Idea安装svn环境
+          </a>
+        </li>
+        
+        <li>
+          <a href="/2014/09/24/hello-world/">
+            Hello World
+          </a>
+        </li>
+        
+    </ul>
+  </section>
+  
+
+  
+    
+<section>
+  <h2>tags</h2>
+  <ul>
+       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android-studio/">android studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jackson/">jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jetbrains/">jetbrains</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li></ul>
+  </ul>
+</section>
+
+
+  
+
+  <!-- Copyright -->
+  <div id="copyright">
+  
+  &copy; 2014 Peter peng
+  
+  Powered by: <a href="https://github.com/tommy351/hexo">Hexo</a><br />
+  Designed by: <a href="http://html5up.net/">HTML5 UP</a>
+  <p>
+    
+      <a href="https://twitter.com/peterfancydata" class="fa fa-twitter">&nbsp;</a>
+     
+    
+      <a href="https://facebook.com/woshitshpq@163.com" class="fa fa-facebook">&nbsp;</a>
+     
+    
+
+   </p>
+</div>
+
+
+
+</div>
+
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+  </div>
+</body>
+</html>
